@@ -29,7 +29,6 @@ EMFLAGS_DEBUG = \
 	-O1
 
 EMFLAGS_SECURE = \
-	-fstack-protector-all \
 	-D_FORTIFY_SOURCE=2 \
 	-fPIE
 
@@ -53,11 +52,11 @@ dist/websql-worker.js: $(BITCODE_FILES) .tmp/api.js exports/functions.json expor
 
 .tmp/sqlite3.bc: sqleet/sqleet.c
 	# Generate sqleet llvm bitcode from the submodule
-	$(EMCC) $(CFLAGS) $(EMFLAGS_OPTIMIZED) $(EMFLAGS_SECURE) sqleet/sqleet.c -o $@
+	$(EMCC) $(CFLAGS) $(EMFLAGS_OPTIMIZED) $(EMFLAGS_SECURE) -c sqleet/sqleet.c -o $@
 
 .tmp/extension-functions.bc: sqlite/$(EXTENSION_FUNCTIONS)
 	# Generate extension-functions llvm bitcode
-	$(EMCC) $(CFLAGS) $(EMFLAGS_OPTIMIZED) $(EMFLAGS_SECURE) -s LINKABLE=1 sqlite/$(EXTENSION_FUNCTIONS) -o $@
+	$(EMCC) $(CFLAGS) $(EMFLAGS_OPTIMIZED) $(EMFLAGS_SECURE) -s LINKABLE=1 -c sqlite/$(EXTENSION_FUNCTIONS) -o $@
 
 .PHONY: clean 
 clean: 
