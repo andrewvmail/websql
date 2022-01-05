@@ -17,7 +17,7 @@
  *
  */
 
-export type ExecResultInterface = {columns: string[]; values: any[]};
+export type ExecResultInterface = {columns: string[] | null; values: any[]};
 
 export type ParamsInterface = any[] | {[key: string]: any};
 

@@ -307,7 +307,7 @@ export class Database {
 
       const statement = new Statement(pointerStatement, this);
       const curresult: ExecResultInterface = {
-        columns: [],
+        columns: null,
         values: [],
       };
 
